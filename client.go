@@ -32,8 +32,7 @@ func (e *Client) Start() {
 	if err := recover(); err != nil {
 		logger.Error("recover", zap.Error(err.(error)))
 	}
-	e.storeHandle.RegisterProducer(e)
-	go e.storeHandle.Start()
+	go e.storeHandle.Store(e)
 	go e.runSend()
 	e.proccess.Start()
 

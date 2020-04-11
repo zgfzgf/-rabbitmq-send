@@ -5,6 +5,7 @@ import (
 	"github.com/zgfzgf/rabbitmq/mqengine"
 	"go.uber.org/zap"
 	"os"
+	"os/signal"
 )
 
 var config *mqengine.GbeConfig
@@ -19,9 +20,8 @@ func main() {
 	logger.Info("see:",
 		zap.ByteString("conf", byte))
 	StartClient()
-	//for i:=0; i<1000000; i++{
-	//	logger.Info("log 初始化成功")
-	//}
 	c := make(chan os.Signal)
+	signal.Notify(c)
 	<-c
+	logger.Info("end send")
 }
